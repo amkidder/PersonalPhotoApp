@@ -23,9 +23,14 @@ public class MainActivity extends AppCompatActivity {
         final ImageView pic = (ImageView) findViewById(R.id.imgLarge);
         grid.setAdapter(new ImageAdapter(this));
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            Toast toast = null;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Personal Photo " + (position + 1), Toast.LENGTH_SHORT).show();
+                if (toast != null) {
+                    toast.cancel();
+                }
+                toast = Toast.makeText(getBaseContext(), "Personal Photo " + (position + 1), Toast.LENGTH_LONG);
+                toast.show();
                 pic.setImageResource(photos[position]);
             }
         });
